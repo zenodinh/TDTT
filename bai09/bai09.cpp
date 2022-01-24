@@ -1,26 +1,11 @@
 #include <iostream>
 using namespace std;
 
-void Xoa(string &a, int xoa)
-{
-    string before, after;
-    before = a.substr(0, xoa);
-    after = a.substr(xoa + 1, a.length() - xoa - 1);
-    a = before + after;
-}
-
-bool TonTai(string s, char t)
-{
-    for (int i = 0; i < s.length(); i++)
-        if (s[i] == t)
-            return true;
-    return false;
-}
-
 bool CaiTien(string s, string p)
 {
     int s_pos, i;
     i = s_pos = 0;
+    char c = '.';
     while (i < p.length() && s_pos < s.length())
     {
         if (s[s_pos] == p[i])
@@ -40,10 +25,15 @@ bool CaiTien(string s, string p)
         }
         else if (p[i] == '.')
         {
-            if (TonTai(s, s[s_pos]) == 1)
-                return false;
+            if (c == '.')
+                c = s[i];
+            else if (s[i] == c)
+            {
+                s_pos++;
+                i++;
+            }
             else
-                ++i;
+                return false;
         }
         else
         {
@@ -52,12 +42,13 @@ bool CaiTien(string s, string p)
             if (i + 2 > p.length() - 1)
                 return false;
             i += 2;
-            if(p[i] == s[s_pos])
+            if (p[i] == s[s_pos])
             {
                 ++i;
                 ++s_pos;
             }
-            else return false;
+            else
+                return false;
         }
     }
     if (i < p.length() || s_pos < s.length())
@@ -67,7 +58,14 @@ bool CaiTien(string s, string p)
 
 int main()
 {
-    string s = "aab";
-    string p = "c*a*b";
-    cout << CaiTien(s, p) << endl;
+    string a, b;
+    freopen("input.txt", "rt", stdin);
+    getline(cin, a);
+    getline(cin, b);
+    freopen("con", "r", stdin);
+
+    if (CaiTien(a, b) == 1)
+        cout << "True\n";
+    else
+        cout << "False\n";
 }

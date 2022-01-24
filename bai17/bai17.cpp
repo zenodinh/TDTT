@@ -13,14 +13,14 @@ bool onlyBit(int a)
     return true;
 }
 
-int TamThuong(int n)
+int TamThuong(int x)
 {
     int i = 1;
-    while (onlyBit(i * n) == 0 && i * n < 1000000000)
+    while (onlyBit(i * x) == 0 && i * x < 1000000000)
     {
         ++i;
     }
-    return i * n;
+    return i * x;
 }
 
 int ConvertStringToInt(string array)
@@ -66,7 +66,4 @@ int main()
     int a = 6;
     // cout << TamThuong(a) << endl;
     cout << CaiTien(a) << endl;
-    // string k = "0";
-    // IncreaseByOne(k);
-    // cout << k << endl;
 }
